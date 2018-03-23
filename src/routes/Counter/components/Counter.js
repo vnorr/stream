@@ -12,6 +12,10 @@ export default class componentName extends React.Component {
       feed: {},
       form : {
         message: ''
+      },
+      streamData: {
+        name: '',
+        token: ''
       }
     }
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -30,7 +34,6 @@ export default class componentName extends React.Component {
   handleSendMessage () {
     const stream = client.feed('user', 'eric', 'du5zqrTMZ8fiJXdKt0JzYBVoyJs')
     const { form, feed } = this.state
-
     stream.addActivity({
       actor: 'eric',
       verb: 'tweet',
@@ -42,13 +45,13 @@ export default class componentName extends React.Component {
   }
 
   connectStream () {
-    const ericFeed = client.feed('user', 'eric', 'du5zqrTMZ8fiJXdKt0JzYBVoyJs')
-    // Isn't this getStream?
-    ericFeed.get().then((data) => {
+    const stream = client.feed('user', 'eric', 'du5zqrTMZ8fiJXdKt0JzYBVoyJs')
+    console.log(stream)
+    stream.get().then((data) => {
       this.setState({ feed: data })
     })
 
-    ericFeed.subscribe((data) => {
+    stream.subscribe((data) => {
       const { feed } = this.state
       if (data.new.length > 0) {
         data.new.forEach((msg) => {
