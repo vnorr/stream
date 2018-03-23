@@ -1,0 +1,12 @@
+.Container {
+  display: flex;
+  justify-content: center;
+  max-width: 1000px;
+}
+
+.ContainerWrap {
+  border: 1px solid black;
+  height: 300px;
+  overflow: scroll;
+  width: 350px;
+}
