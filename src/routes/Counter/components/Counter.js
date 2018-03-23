@@ -13,6 +13,10 @@ export default class componentName extends React.Component {
       feed: {},
       form : {
         message: ''
+      },
+      streamData: {
+        name: '',
+        token: ''
       }
     }
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -31,8 +35,6 @@ export default class componentName extends React.Component {
   handleSendMessage () {
     const stream = client.feed('user', 'eric', 'du5zqrTMZ8fiJXdKt0JzYBVoyJs')
     const { form, feed } = this.state
-    console.log(form.message)
-
     stream.addActivity({
       actor: 'eric',
       verb: 'tweet',
@@ -43,24 +45,30 @@ export default class componentName extends React.Component {
     })
   }
 
-  getStream () {
-    const ericFeed = client.feed('user', 'eric', 'du5zqrTMZ8fiJXdKt0JzYBVoyJs')
-    ericFeed.subscribe((data) => {
+  connectStream () {
+    const stream = client.feed('user', 'eric', 'du5zqrTMZ8fiJXdKt0JzYBVoyJs')
+    console.log(stream)
+    stream.get().then((data) => {
       this.setState({ feed: data })
     })
 
-    ericFeed.get().then((data) => {
-      this.setState({ feed: data })
+    stream.subscribe((data) => {
+      const { feed } = this.state
+      if (data.new.length > 0) {
+        data.new.forEach((msg) => {
+          feed.results.unshift(msg)
+          this.setState({ feed })
+        })
+      }
     })
   }
 
   componentDidMount () {
-    this.getStream()
+    this.connectStream()
   }
 
   render () {
     const { feed } = this.state
-
     return (
       <div className='Container'>
         <AuthView
