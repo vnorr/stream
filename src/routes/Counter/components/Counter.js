@@ -32,7 +32,8 @@ export default class componentName extends React.Component {
     this.setState({ form })
   }
 
-  handleSendMessage () {
+  handleSendMessage (e) {
+    e.preventDefault()
     const stream = client.feed('user', 'eric', 'du5zqrTMZ8fiJXdKt0JzYBVoyJs')
     const { form, feed } = this.state
     stream.addActivity({

@@ -17,19 +17,22 @@ export default class MessageBoard extends React.Component {
       feed.results.forEach((message, i) => {
         if (message.verb === 'tweet') {
           const key = `tweet_${i}`
-          messages.push(<span className='Tweet' key={key}> {message.tweet}</span>)
+          messages.push(<div className='Message' key={key}> {message.tweet}</div>)
         }
       })
     }
 
     return (
-      <div>
+      <div className="MessageWrapper">
         <h3>{name}</h3>
-        <div className='ContainerWrap'>
+        <div className="Messages">
           {messages}
         </div>
-        <input onChange={handleInputChange} type='text' name='message' />
-        <button onClick={handleSendMessage} type='submit'>Send</button>
+        <form onSubmit={handleSendMessage} className="MessageInput" action="">
+          <input autoFocus onChange={handleInputChange} type='text' name='message' />
+          <button type='submit'>Send</button>
+        </form>
+
       </div>
     )
   }
