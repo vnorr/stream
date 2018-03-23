@@ -53,12 +53,13 @@ export default class AuthView extends React.Component {
   }
 
   render() {
-    const { loggedIn } = this.state
+    const { loggedIn, user } = this.state
     const { handleInputChange, handleSendMessage, name, feed } = this.props
 
     if(loggedIn) {
       return (
         <MessageBoard
+          user={user}
           handleInputChange={handleInputChange}
           handleSendMessage={handleSendMessage}
           name={name}

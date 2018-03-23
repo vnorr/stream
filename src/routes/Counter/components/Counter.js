@@ -3,10 +3,8 @@ import './counter.scss'
 
 import AuthView from './AuthView'
 
-const stream = require('getstream')
-const client = stream.connect('n2wcamdjmvt4', null, '35635')
-
 export default class componentName extends React.Component {
+<<<<<<< Updated upstream
   constructor (props) {
     super(props)
     this.state = {
@@ -68,16 +66,12 @@ export default class componentName extends React.Component {
     this.connectStream()
   }
 
+=======
+>>>>>>> Stashed changes
   render () {
-    const { feed } = this.state
     return (
       <div className='Container'>
-        <AuthView
-          name='Activity'
-          handleInputChange={this.handleInputChange}
-          handleSendMessage={this.handleSendMessage}
-          feed={feed}
-        />
+        <AuthView />
       </div>
     )
   }
