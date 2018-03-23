@@ -30,7 +30,6 @@ export default class componentName extends React.Component {
   handleSendMessage () {
     const stream = client.feed('user', 'eric', 'du5zqrTMZ8fiJXdKt0JzYBVoyJs')
     const { form, feed } = this.state
-    console.log(form.message)
 
     stream.addActivity({
       actor: 'eric',
@@ -42,22 +41,21 @@ export default class componentName extends React.Component {
     })
   }
 
-  getStream () {
-    const ericFeed = client.feed('user', 'eric', 'du5zqrTMZ8fiJXdKt0JzYBVoyJs')
-    // Isn't this connectStream?
-    ericFeed.subscribe((data) => {
-      console.log('Initial stream fetch')
-      console.log(data)
-    })
-  }
-
   connectStream () {
     const ericFeed = client.feed('user', 'eric', 'du5zqrTMZ8fiJXdKt0JzYBVoyJs')
     // Isn't this getStream?
     ericFeed.get().then((data) => {
-      console.log('Stream is connected')
-      console.log(data)
       this.setState({ feed: data })
+    })
+
+    ericFeed.subscribe((data) => {
+      const { feed } = this.state
+      if (data.new.length > 0) {
+        data.new.forEach((msg) => {
+          feed.results.unshift(msg)
+          this.setState({ feed })
+        })
+      }
     })
   }
 
@@ -67,7 +65,6 @@ export default class componentName extends React.Component {
 
   render () {
     const { feed } = this.state
-
     return (
       <div className='Container'>
         <div>

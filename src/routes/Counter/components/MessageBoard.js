@@ -10,7 +10,7 @@ export default class MessageBoard extends React.Component {
 
   render () {
     const { handleInputChange, handleSendMessage, feed } = this.props
-    console.log(feed)
+
     let messages = []
 
     if (feed.results) {
