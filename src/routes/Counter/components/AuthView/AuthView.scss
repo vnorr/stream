@@ -1,0 +1,23 @@
+.AuthView {
+
+  button {
+    background: black;
+    opacity: .5;
+    padding: 16px 24px;
+    border: 0;
+    border-radius: 4px;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    font-size: 12px;
+    outline: none;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    &:active {
+      opacity: 1;
+    }
+  }
+}

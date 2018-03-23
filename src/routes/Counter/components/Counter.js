@@ -1,6 +1,7 @@
 import React from 'react'
-import MessageBoard from './MessageBoard'
 import './counter.scss'
+
+import AuthView from './AuthView'
 
 const stream = require('getstream')
 const client = stream.connect('n2wcamdjmvt4', null, '35635')
@@ -62,14 +63,12 @@ export default class componentName extends React.Component {
 
     return (
       <div className='Container'>
-        <div>
-          <MessageBoard
-            name='Activity'
-            handleInputChange={this.handleInputChange}
-            handleSendMessage={this.handleSendMessage}
-            feed={feed}
-          />
-        </div>
+        <AuthView
+          name='Activity'
+          handleInputChange={this.handleInputChange}
+          handleSendMessage={this.handleSendMessage}
+          feed={feed}
+        />
       </div>
     )
   }
