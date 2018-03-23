@@ -44,17 +44,25 @@ export default class componentName extends React.Component {
 
   getStream () {
     const ericFeed = client.feed('user', 'eric', 'du5zqrTMZ8fiJXdKt0JzYBVoyJs')
+    // Isn't this connectStream?
     ericFeed.subscribe((data) => {
-      this.setState({ feed: data })
+      console.log('Initial stream fetch')
+      console.log(data)
     })
+  }
 
+  connectStream () {
+    const ericFeed = client.feed('user', 'eric', 'du5zqrTMZ8fiJXdKt0JzYBVoyJs')
+    // Isn't this getStream?
     ericFeed.get().then((data) => {
+      console.log('Stream is connected')
+      console.log(data)
       this.setState({ feed: data })
     })
   }
 
   componentDidMount () {
-    this.getStream()
+    this.connectStream()
   }
 
   render () {
